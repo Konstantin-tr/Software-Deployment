@@ -48,7 +48,7 @@
       "properties": {
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]",
         "siteConfig": {
-          "linuxFxVersion": "NODE|10.15"
+          "linuxFxVersion": "NODE|10.14"
         }
       },
       "resources": [
