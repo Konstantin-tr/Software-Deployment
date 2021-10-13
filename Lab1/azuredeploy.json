@@ -10,6 +10,14 @@
         "description": "Web app name."
       }
     },
+    "storageAccountName": {
+      "type": "string",
+      "defaultValue": "[concat('storage-', uniqueString(resourceGroup().id))]",
+      "minLength": 2,
+      "metadata": {
+        "description": "Storage account name."
+      }
+    },
     "repoUrl": {
       "type": "string",
       "defaultValue": " ",
@@ -23,6 +31,17 @@
     "location": "[resourceGroup().location]"
   },
   "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2021-01-01",
+      "name": "[parameters('storageAccountName')]",
+      "location": "[variables('location')]",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "StorageV2",
+      "properties": {}
+    },
     {
       "type": "Microsoft.Web/serverfarms",
       "apiVersion": "2020-12-01",

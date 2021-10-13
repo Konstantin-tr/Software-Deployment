@@ -5,6 +5,9 @@
     "webAppName": {
       "value": "myDemoExpressApp-tr"
     },
+    "storageAccountName": {
+      "value": "myDemoStorageAccount-tr"
+    },
     "repoUrl": {
       "value": "https://github.com/Konstantin-tr/Node-Express-Demo.git"
     }
