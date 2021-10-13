@@ -12,7 +12,7 @@
     },
     "storageAccountName": {
       "type": "string",
-      "defaultValue": "[concat('storage-', uniqueString(resourceGroup().id))]",
+      "defaultValue": "[concat('str', uniqueString(resourceGroup().id))]",
       "minLength": 2,
       "metadata": {
         "description": "Storage account name."
