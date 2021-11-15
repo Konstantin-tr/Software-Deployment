@@ -37,7 +37,7 @@ ENV MYSQL_DB 'db'
 ENV MYSQL_USER 'user'
 ENV MYSQL_PASS 'pass'
 
-CMD service mysql restart \
-    && echo "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASS';" | mysql -uroot \
+CMD service mysql start \
+    && echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASS';" | mysql -uroot \
     && echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DB;" | mysql -uroot \
     && mysqld --user=mysql
