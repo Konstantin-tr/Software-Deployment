@@ -32,8 +32,9 @@ ENV WORDPRESS_DB_HOST 'localhost'
 EXPOSE 80
 VOLUME /var/www/html/wordpress
 
-CMD sed -i "s/^.*DB_NAME.*$/define('DB_NAME', '${WORDPRESS_DB}');/" /var/www/html/wordpress/wp-config-sample.php \
-    && sed -i "s/^.*DB_USER.*$/define('DB_USER', '${WORDPRESS_DB_USER}');/" /var/www/html/wordpress/wp-config-sample.php \
-    && sed -i "s/^.*DB_PASSWORD.*$/define('DB_PASSWORD', '${WORDPRESS_DB_PASS}');/" /var/www/html/wordpress/wp-config-sample.php \
-    && sed -i "s/^.*DB_HOST.*$/define('DB_HOST', '${WORDPRESS_DB_HOST}');/" /var/www/html/wordpress/wp-config-sample.php \
+CMD cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php \
+    && sed -i "s/^.*DB_NAME.*$/define('DB_NAME', '${WORDPRESS_DB}');/" /var/www/html/wordpress/wp-config.php \
+    && sed -i "s/^.*DB_USER.*$/define('DB_USER', '${WORDPRESS_DB_USER}');/" /var/www/html/wordpress/wp-config.php \
+    && sed -i "s/^.*DB_PASSWORD.*$/define('DB_PASSWORD', '${WORDPRESS_DB_PASS}');/" /var/www/html/wordpress/wp-config.php \
+    && sed -i "s/^.*DB_HOST.*$/define('DB_HOST', '${WORDPRESS_DB_HOST}');/" /var/www/html/wordpress/wp-config.php \
     && /usr/sbin/apachectl -D FOREGROUND
