@@ -26,5 +26,6 @@ Abschließend kann man über `-p 8080:80` den HTTP Port 80 auf einen beliebigen 
 
 ### Docker Compose
 
-Wenn die Images nach Anleitung erstellt wurden, kann nun das docker compose file verwendet werden. Dieses funktioniert fast genau gleich wie bei Teil 1. Der Befehl `docker-compose up` startet das Projekt und auf Port 8080 und dem Directory "/wordpress/" kann dann die Installation abgeschlossen werden.
+Wenn die Images nach Anleitung erstellt wurden, kann nun das docker compose file verwendet werden. Dieses funktioniert fast genau gleich wie bei Teil 1. Der Befehl `docker-compose up` startet das Projekt. Auf Port 8080 ist der Webserver erreichbar. Unter dem Directory "/wordpress/" kann dann die Wordpress-Seite aufgerufen und konfiguriert werden.
+
 Die DB-Config wird direkt aus dem Compose übernommen. Dazu ist es wichtig, dass der MYSQL Server bereits läuft, deshalb wird auch hier `depends_on` verwendet.
