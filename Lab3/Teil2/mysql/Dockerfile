@@ -17,7 +17,7 @@ RUN sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/
 
 # Secure installation
 RUN service mysql restart \
-    && echo "UPDATE mysql.user SET authentication_string = PASSWORD('" + CHANGEME + "') WHERE User = 'root';" | mysql -uroot \
+    && echo "UPDATE mysql.user SET authentication_string = PASSWORD('mysql_root') WHERE User = 'root';" | mysql -uroot \
     && echo "DROP USER IF EXISTS ''@'localhost';" | mysql -uroot \
     && echo "DROP USER IF EXISTS ''@'$(hostname)';" | mysql -uroot \
     && echo "DROP DATABASE IF EXISTS test;" | mysql -uroot \
@@ -35,8 +35,11 @@ ENV MYSQL_DB 'db'
 ENV MYSQL_USER 'user'
 ENV MYSQL_PASS 'pass'
 
-CMD service mysql restart \
+CMD echo "Starting MYSQL setup..." \
+    && service mysql restart \
     && echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASS';" | mysql -uroot \
     && echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DB;" | mysql -uroot \
+    && echo "GRANT ALL PRIVILEGES ON $MYSQL_DB.* TO '$MYSQL_USER'@'%';" | mysql -uroot \
     && service mysql stop \
+    && echo "Starting MYSQL Daemon..." \
     && mysqld --user=mysql
