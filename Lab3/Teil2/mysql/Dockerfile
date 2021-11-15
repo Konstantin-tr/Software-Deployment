@@ -22,9 +22,7 @@ RUN service mysql restart \
     && echo "DROP USER IF EXISTS ''@'$(hostname)';" | mysql -uroot \
     && echo "DROP DATABASE IF EXISTS test;" | mysql -uroot \
     && echo "FLUSH PRIVILEGES;" | mysql -uroot \
-    && service mysql restart
-
-
+    && service mysql stop
 
 VOLUME ["/var/lib/mysql/", "/etc/mysql"]
 
@@ -37,7 +35,8 @@ ENV MYSQL_DB 'db'
 ENV MYSQL_USER 'user'
 ENV MYSQL_PASS 'pass'
 
-CMD service mysql start \
+CMD service mysql restart \
     && echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASS';" | mysql -uroot \
     && echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DB;" | mysql -uroot \
+    && service mysql stop \
     && mysqld --user=mysql
